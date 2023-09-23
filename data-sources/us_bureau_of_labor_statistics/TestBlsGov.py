@@ -1,0 +1,16 @@
+import unittest
+from BlsGov import BlsGov
+
+
+class TestBlsGov(unittest.TestCase):
+    def test_get_data(self):
+        bls = BlsGov()
+        data = bls.get_data('LNU02000000', '2010', '2019')
+        self.assertTrue(len(data) > 0)
+        self.assertEqual('REQUEST_SUCCEEDED', data['status'])
+
+    def test_check_date_range(self):
+        bls = BlsGov()
+        with self.assertRaises(Exception):
+            bls.check_date_range('2000', '2021')
+        self.assertTrue(bls.check_date_range('2000', '2019'))
