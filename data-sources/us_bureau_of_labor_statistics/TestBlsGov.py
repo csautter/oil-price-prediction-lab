@@ -9,6 +9,11 @@ class TestBlsGov(unittest.TestCase):
         self.assertTrue(len(data) > 0)
         self.assertEqual('REQUEST_SUCCEEDED', data['status'])
 
+    def test_get_data_out_of_range(self):
+        bls = BlsGov()
+        with self.assertRaises(Exception):
+            bls.get_data('LNU02000000', '2000', '2021')
+
     def test_check_date_range(self):
         bls = BlsGov()
         with self.assertRaises(Exception):

@@ -3,3 +3,4 @@
 **/__pycache__
 .idea/*
 /.vscode/settings.json
+/**/.ipynb_checkpoints/*
