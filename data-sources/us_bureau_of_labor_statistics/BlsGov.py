@@ -13,7 +13,7 @@ from data_sources_interface import DataSourcesInterface
 
 class BlsGov(DataSourcesInterface):
     @staticmethod
-    def check_date_range(startyear, endyear):
+    def check_date_range(startyear: str, endyear: str) -> bool:
         year_diff = int(endyear) - int(startyear)
         if year_diff > 20:
             raise Exception('Registered users may request up to 20 years per query.')
@@ -21,7 +21,7 @@ class BlsGov(DataSourcesInterface):
             return True
 
     @staticmethod
-    def get_data(seriesid, startyear, endyear):
+    def get_data(seriesid: str, startyear: str, endyear: str) -> dict:
         BlsGov.check_date_range(startyear, endyear)
         filename = 'cache/' + seriesid + '/startyear' + startyear + '_endyear' + endyear + '.json'
         if os.path.isfile(filename):
@@ -52,11 +52,11 @@ class BlsGov(DataSourcesInterface):
         return json_data
 
     @staticmethod
-    def convert_json_to_pandas_df(json_data):
+    def convert_json_to_pandas_df(json_data: object) -> pd.DataFrame:
         json_timeseries = json_data['Results']['series'][0]['data']
         df = pd.DataFrame(json_timeseries)
         return df
 
-    def get_data_as_pandas_df(self, seriesid, startyear, endyear):
+    def get_data_as_pandas_df(self, seriesid: str, startyear: str, endyear: str):
         json_data = self.get_data(seriesid, startyear, endyear)
         return self.convert_json_to_pandas_df(json_data)

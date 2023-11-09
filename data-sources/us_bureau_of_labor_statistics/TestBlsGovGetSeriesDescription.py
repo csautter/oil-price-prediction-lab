@@ -11,6 +11,6 @@ class TestBlsGovGetSeriesDescription(unittest.TestCase):
         self.assertEqual('CUSR0000SA0', data['series_id'].values[0])
 
     def test_get_series_description_with_invalid_series_id(self):
-        bls = BlsGovGetSeriesDescription('LNU02000001')
+        bls = BlsGovGetSeriesDescription('LNU02000001XXX')
         data = bls.get_series_description()
         self.assertTrue(len(data) == 0)

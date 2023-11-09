@@ -2,6 +2,10 @@ import os
 import urllib.request
 import pandas as pd
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class BlsGovGetSeriesDescription:
     series_id: str = None
