@@ -3,15 +3,19 @@ import json
 import os
 import sys
 import pandas as pd
+from .BlsCache import BlsCache
 from dotenv import load_dotenv
-
 load_dotenv()
-sys.path.insert(0, "..")
 
-from data_sources_interface import DataSourcesInterface
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from data_source_interfaces.DataSourcesInterface import DataSourcesInterface
 
 
 class BlsGov(DataSourcesInterface):
+    @staticmethod
+    def get_cache_directory() -> str:
+        return BlsCache.get_cache_directory()
+
     @staticmethod
     def check_date_range(startyear: str, endyear: str) -> bool:
         year_diff = int(endyear) - int(startyear)
@@ -20,10 +24,9 @@ class BlsGov(DataSourcesInterface):
         else:
             return True
 
-    @staticmethod
-    def get_data(seriesid: str, startyear: str, endyear: str) -> dict:
+    def get_data(self, seriesid: str, startyear: str, endyear: str) -> dict:
         BlsGov.check_date_range(startyear, endyear)
-        filename = 'cache/' + seriesid + '/startyear' + startyear + '_endyear' + endyear + '.json'
+        filename = self.get_cache_directory() + '/' + seriesid + '/startyear' + startyear + '_endyear' + endyear + '.json'
         if os.path.isfile(filename):
             with open(filename) as json_file:
                 json_data = json.load(json_file)

@@ -1,6 +1,7 @@
 import os
 import urllib.request
 import pandas as pd
+from .BlsCache import BlsCache
 
 from dotenv import load_dotenv
 
@@ -21,7 +22,7 @@ class BlsGovGetSeriesDescription:
         self.database_id = self.series_id[0:2]
 
     def __generate_local_filename(self) -> None:
-        self.local_filename = 'cache/' + self.database_id.lower() + '.series'
+        self.local_filename = BlsCache.get_cache_directory() + '/' + self.database_id.lower() + '.series'
 
     def __download_series_description(self) -> None:
         remote_url = 'https://download.bls.gov/pub/time.series/' + self.database_id.lower() + '/' + self.database_id.lower() + '.series'
