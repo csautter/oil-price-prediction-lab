@@ -1,5 +1,7 @@
+import json
 import os
 import sys
+from datetime import date
 from typing import Literal
 
 import requests
@@ -16,10 +18,7 @@ from data_source_interfaces.DataSourcesInterface import DataSourcesInterface
 
 class AlphaVantageCommodities(DataSourcesInterface):
     @staticmethod
-    def get_cache_directory() -> str:
-        return AlphaVantageCache.get_cache_directory()
-
-    def __request_url_builder(self, function: str = None, interval: str = None) -> str:
+    def __request_url_builder(function: str = None, interval: str = None) -> str:
         parts: list = []
 
         if function is not None:
@@ -35,9 +34,26 @@ class AlphaVantageCommodities(DataSourcesInterface):
                  startyear: str = None,
                  endyear: str = None,
                  interval: Literal['daily', 'weekly', 'monthly'] = 'daily') -> dict:
+
+        today = date.today()
+        filename = AlphaVantageCache.get_cache_directory() + '/' + str(today) + '_' + seriesid + '_'+interval+'.json'
+
+        # read data from cache if exists
+        if os.path.isfile(filename):
+            with open(filename) as json_file:
+                json_data = json.load(json_file)
+                return json_data
+
+        # request data from API
         r = requests.get(self.__request_url_builder(function=seriesid, interval=interval))
-        data = r.json()
-        return data
+        json_data = r.json()
+
+        # write data to cache
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, 'w') as f:
+            f.write(json.dumps(json_data))
+
+        return json_data
 
     def get_data_as_pandas_df(self, seriesid: str, startyear: str = None, endyear: str = None) -> pd.DataFrame:
         df = pd.DataFrame(self.get_data(seriesid)['data'])
