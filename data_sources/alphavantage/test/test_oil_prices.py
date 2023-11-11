@@ -11,9 +11,9 @@ class TestAlphaVantageCommodities(unittest.TestCase):
     def test_get_data(self):
         av = AlphaVantageCommodities()
         data = av.get_data('WTI')
-        print(data)
+        self.assertTrue(data['data'][0]) # check if data is not empty
 
     def test_get_data_as_pandas_df(self):
         av = AlphaVantageCommodities()
         df = av.get_data_as_pandas_df('WTI')
-        print(df)
+        self.assertTrue(df['value'][0] > 0)

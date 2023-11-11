@@ -57,4 +57,8 @@ class AlphaVantageCommodities(DataSourcesInterface):
 
     def get_data_as_pandas_df(self, seriesid: str, startyear: str = None, endyear: str = None) -> pd.DataFrame:
         df = pd.DataFrame(self.get_data(seriesid)['data'])
+        df = df[df['value'] != '.']
+        df['value'] = pd.to_numeric(df['value'], downcast="float")
+        df['date'] = pd.to_datetime(df['date'])
+        print(df)
         return df
