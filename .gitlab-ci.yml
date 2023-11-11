@@ -23,10 +23,9 @@ pytest:
   script:
     - pip install -U pytest
     - pytest --version
-    - pip install -r ./data_sources/us_bureau_of_labor_statistics/requirements.txt
-    - cd ./data_sources/us_bureau_of_labor_statistics/test/
-    - pytest --junitxml=report.xml
+    - pip install -r ./data_sources/us_bureau_of_labor_statistics/requirements.txt -r ./data_sources/alphavantage/requirements.txt
+    - pytest --junitxml=report.xml ./data_sources/us_bureau_of_labor_statistics/test/ ./data_sources/alphavantage/test/
   artifacts:
     when: always
     reports:
-      junit: data_sources/us_bureau_of_labor_statistics/test/report.xml
+      junit: report.xml
