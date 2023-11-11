@@ -12,9 +12,9 @@ class DataSourcesInterface(ABC):
         raise NotImplementedError('create property cache_directory')
 
     @abstractmethod
-    def get_data(self, seriesid: str, startyear: str, endyear: str) -> dict:
+    def get_data(self, seriesid: str, startyear: str = None, endyear: str = None) -> dict:
         raise NotImplementedError('users must define get_data to use this base class')
 
     @abstractmethod
-    def get_data_as_pandas_df(self, seriesid: str, startyear: str, endyear: str) -> pd.DataFrame:
+    def get_data_as_pandas_df(self, seriesid: str, startyear: str = None, endyear: str = None) -> pd.DataFrame:
         raise NotImplementedError('users must define get_data_as_pandas_df to use this base class')
