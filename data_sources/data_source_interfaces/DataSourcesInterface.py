@@ -14,3 +14,9 @@ class DataSourcesInterface(ABC):
     @abstractmethod
     def get_data_as_pandas_df(self, seriesid: str, startyear: str = None, endyear: str = None) -> pd.DataFrame:
         raise NotImplementedError('users must define get_data_as_pandas_df to use this base class')
+
+    @staticmethod
+    @abstractmethod
+    def get_all_curated_series_ids() -> list:
+        """Returns a list of all curated series ids"""
+        raise NotImplementedError('users must define get_all_curated_series_ids to use this base class')

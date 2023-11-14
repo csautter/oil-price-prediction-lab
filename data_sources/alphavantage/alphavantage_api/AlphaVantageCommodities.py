@@ -60,5 +60,13 @@ class AlphaVantageCommodities(DataSourcesInterface):
         df = df[df['value'] != '.']
         df['value'] = pd.to_numeric(df['value'], downcast="float")
         df['date'] = pd.to_datetime(df['date'])
-        print(df)
         return df
+
+    @staticmethod
+    def get_all_curated_series_ids() -> list:
+        curated_series_ids = [
+            'WTI',
+            'BRENT',
+            'NATURAL_GAS'
+        ]
+        return curated_series_ids
