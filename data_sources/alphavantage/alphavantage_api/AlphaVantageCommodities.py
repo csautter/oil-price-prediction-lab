@@ -3,7 +3,7 @@ import os
 import sys
 from datetime import date
 from typing import Literal
-
+import matplotlib.pyplot as plt
 import requests
 import pandas as pd
 
@@ -55,11 +55,17 @@ class AlphaVantageCommodities(DataSourcesInterface):
 
         return json_data
 
-    def get_data_as_pandas_df(self, seriesid: str, startyear: str = None, endyear: str = None) -> pd.DataFrame:
-        df = pd.DataFrame(self.get_data(seriesid)['data'])
+    def get_data_as_pandas_df(self, seriesid: str,
+                              startyear: str = None,
+                              endyear: str = None,
+                              interval: Literal['daily', 'weekly', 'monthly'] = 'daily') -> pd.DataFrame:
+
+        df = pd.DataFrame(self.get_data(seriesid, startyear, endyear, interval)['data'])
         df = df[df['value'] != '.']
-        df['value'] = pd.to_numeric(df['value'], downcast="float")
+        df[seriesid+'_value'] = pd.to_numeric(df['value'], downcast="float")
+        df.drop(['value'], axis=1, inplace=True)
         df['date'] = pd.to_datetime(df['date'])
+        df.sort_values(by=['date'], inplace=True)
         return df
 
     @staticmethod
@@ -70,3 +76,33 @@ class AlphaVantageCommodities(DataSourcesInterface):
             'NATURAL_GAS'
         ]
         return curated_series_ids
+
+    def plot_series_id(self, seriesid: str,
+                       startyear: str = None,
+                       endyear: str = None,
+                       interval: Literal['daily', 'weekly', 'monthly'] = 'daily') -> pd.DataFrame:
+        df = self.get_data_as_pandas_df(seriesid, startyear, endyear, interval)
+        df.plot(x="date", y=seriesid+'_value', linewidth=1)
+        plt.xlabel("Date", size=10)
+        plt.ylabel("Price", size=10)
+        plt.title(seriesid + " Price", size=15)
+        plt.show()
+
+        return df
+
+    def plot_multiple_series_ids(self, seriesids: list,
+                                 startyear: str = None,
+                                 endyear: str = None,
+                                 interval: Literal['daily', 'weekly', 'monthly'] = 'daily') -> None:
+        for seriesid in seriesids:
+            self.plot_series_id(seriesid, startyear, endyear, interval)
+
+    def get_data_as_pandas_df_multiple_series_ids(self, seriesids: list,
+                                                  startyear: str = None,
+                                                  endyear: str = None,
+                                                  interval: Literal['daily', 'weekly', 'monthly'] = 'daily') -> pd.DataFrame:
+        df = self.get_data_as_pandas_df(seriesids.pop(0), startyear, endyear, interval)
+        for seriesid in seriesids:
+            df = df.merge(self.get_data_as_pandas_df(seriesid, startyear, endyear, interval), on='date', how='outer')
+
+        return df
