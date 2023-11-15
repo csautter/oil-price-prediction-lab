@@ -15,6 +15,7 @@ class PandasDataFrameNormalizer:
             self.__min = df[column].min()
 
         df[column] = (df[column] - df[column].min()) / (df[column].max() - df[column].min())
+        df.sort_values(by=['date'], inplace=True)
         return df
 
     def inverse_transform_single_value(self, value: float) -> float:
@@ -24,6 +25,7 @@ class PandasDataFrameNormalizer:
     def inverse_transform_pandas_data_frame_column(self, df: pd.DataFrame, column: str) -> pd.DataFrame:
         """Inverse transform pandas data frame column"""
         df[column] = self.inverse_transform_single_value(df[column])
+        df.sort_values(by=['date'], inplace=True)
         return df
 
     def inverse_transform_numpy_array(self, array: np.array) -> np.array:
