@@ -1,0 +1,4 @@
+tensorflow[and-cuda] = 11.8
+
+# shipped with tensorflow[and-cuda]
+# tensorrt >= 8.6.1
