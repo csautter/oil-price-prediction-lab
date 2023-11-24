@@ -16,14 +16,15 @@ class ImportHelper:
         return cls.__instance
 
     def __init__(self, verbose: bool = False) -> None:
-        if(self.__initalized): return
+        if self.__initalized:
+            return
 
         self.__initalized = True
 
         self.verbose: bool = verbose
-        self.import_directories()
+        self.__crawl_directory_for_init_files()
 
-    def get_current_directory(self) -> str:
+    def __get_current_directory(self) -> str:
         current_directory = os.path.dirname(os.path.realpath(__file__))
 
         if self.verbose:
@@ -31,25 +32,21 @@ class ImportHelper:
 
         return current_directory
 
-    def insert_directory_to_path(self, directory: str) -> None:
+    def __insert_directory_to_path(self, directory: str) -> None:
         if self.verbose:
             print('insert directory to path: ' + directory)
 
-        full_directory_path = os.path.abspath(os.path.join(self.get_current_directory(), directory))
+        full_directory_path = os.path.abspath(os.path.join(self.__get_current_directory(), directory))
         if self.verbose:
             print('full directory: ' + full_directory_path)
 
         sys.path.insert(0, full_directory_path)
 
-    def import_directories(self) -> None:
-        for directory in self.directories():
-            self.insert_directory_to_path(directory)
+    def __crawl_directory_for_init_files(self) -> None:
+        for root, dirs, files in os.walk(self.__get_current_directory()):
+            for file in files:
+                if file == '__init__.py':
+                    if self.verbose:
+                        print('found __init__.py in ' + root)
 
-    @staticmethod
-    def directories() -> list:
-        return [
-            'data_sources/us_bureau_of_labor_statistics/bls_gov',
-            'data_sources/alphavantage/alphavantage_api',
-            'data_sources/tools',
-            'models/helper'
-        ]
+                    self.__insert_directory_to_path(root)
