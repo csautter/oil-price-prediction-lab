@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from datetime import date
+from pathlib import Path
 from typing import Literal
 import matplotlib.pyplot as plt
 import requests
@@ -10,10 +11,12 @@ import pandas as pd
 from dotenv import load_dotenv
 load_dotenv()
 
-from .AlphaVantageCache import AlphaVantageCache
+sys.path.insert(0, os.path.abspath(os.path.join(Path().resolve(), '../../..')))
+from ImportHelper import ImportHelper
+ImportHelper()
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-from data_source_interfaces.DataSourcesInterface import DataSourcesInterface
+from AlphaVantageCache import AlphaVantageCache
+from DataSourcesInterface import DataSourcesInterface
 
 
 class AlphaVantageCommodities(DataSourcesInterface):
