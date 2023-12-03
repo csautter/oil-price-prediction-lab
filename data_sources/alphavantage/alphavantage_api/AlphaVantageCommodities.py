@@ -11,7 +11,7 @@ import pandas as pd
 from dotenv import load_dotenv
 load_dotenv()
 
-sys.path.insert(0, os.path.abspath(os.path.join(Path().resolve(), '../../..')))
+sys.path.insert(0, os.path.abspath(os.path.join(Path(__file__).resolve(), '../../../..')))
 from ImportHelper import ImportHelper
 ImportHelper()
 
