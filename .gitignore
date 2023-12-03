@@ -5,5 +5,4 @@
 /.vscode/settings.json
 /**/.ipynb_checkpoints/*
 /report.xml
-/data_sources/alphavantage/model_checkpoint.h5
-/data_sources/alphavantage/model_multi_checkpoint.h5
+*checkpoint.h5
