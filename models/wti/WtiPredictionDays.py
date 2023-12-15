@@ -128,6 +128,10 @@ class WtiPredictionDays:
 
         return df
 
+    def inverse_transform_numpy_array(self, array: np.array) -> np.array:
+        """Inverse transform numpy array"""
+        return self.pd_batch_normalizer.inverse_transform_numpy_array(array, self.output_column)
+
     def data_collection_preprocessing(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Preprocess the data collection.
