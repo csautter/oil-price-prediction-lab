@@ -3,7 +3,7 @@ import numpy as np
 
 
 class PandasDataFrameNormalizer:
-    """Normalizes a pandas dataframe"""
+    """Normalizes single columns of a pandas dataframe"""
     __max: float = None
     __min: float = None
 
