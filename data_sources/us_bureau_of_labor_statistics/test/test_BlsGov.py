@@ -26,3 +26,8 @@ class TestBlsGov(unittest.TestCase):
         with self.assertRaises(Exception):
             bls.check_date_range('2000', '2021')
         self.assertTrue(bls.check_date_range('2000', '2019'))
+
+    def test_plot_series_id(self):
+        bls = BlsGov()
+        bls.plot_series_id('LNU02000000', '2010', '2019')
+        self.assertTrue(True)

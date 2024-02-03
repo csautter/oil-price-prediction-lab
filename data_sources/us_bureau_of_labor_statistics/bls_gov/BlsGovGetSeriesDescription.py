@@ -48,3 +48,59 @@ class BlsGovGetSeriesDescription:
         df_row = df.loc[df['series_id'] == self.series_id]
 
         return df_row
+
+    def get_series_id(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['series_id'].values[0]
+
+    def get_area_code(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['area_code'].values[0]
+
+    def get_item_code(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['item_code'].values[0]
+
+    def get_seasonal(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['seasonal'].values[0]
+
+    def get_periodicity_code(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['periodicity_code'].values[0]
+
+    def base_code(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['base_code'].values[0]
+
+    def pase_period(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['base_period'].values[0]
+
+    def get_series_title(self) -> str:
+        df_row = self.get_series_description()
+        return df_row['series_title'].values[0]
+
+    def get_footnote_codes(self) -> list:
+        df_row = self.get_series_description()
+        return df_row['footnote_codes'].values[0].split(',')
+
+    def get_begin_year(self) -> int:
+        df_row = self.get_series_description()
+        return df_row['begin_year'].values[0]
+
+    def get_begin_period(self) -> int:
+        df_row = self.get_series_description()
+        return df_row['begin_period'].values[0]
+
+    def get_end_year(self) -> int:
+        df_row = self.get_series_description()
+        return df_row['end_year'].values[0]
+
+    def get_end_period(self) -> int:
+        df_row = self.get_series_description()
+        return df_row['end_period'].values[0]
+
+    def get_link_to_timeseries_viewer(self) -> str:
+        link = 'https://beta.bls.gov/dataViewer/view/timeseries/' + self.series_id
+        return link
