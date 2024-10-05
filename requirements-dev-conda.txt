@@ -8,4 +8,4 @@ scikit-learn >= 1.3.2
 python-dotenv >= 1.0.0
 seaborn >= 0.12.2
 # https://anaconda.org/nvidia/cuda
-cuda = 11.8
+cudatoolkit == 11.8.0
