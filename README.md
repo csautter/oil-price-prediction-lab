@@ -1,14 +1,19 @@
 # Install
 ## create conda environment
 ````bash
-conda create --name oil-price-prediction --file requirements-dev.txt --channel default --channel conda-forge
+conda create --name oil-price-prediction --file requirements-dev-conda.txt --channel default --channel conda-forge
 ````
 ## install conda packages
 ````bash
-conda install --name oil-price-prediction --file requirements-dev.txt --channel default --channel conda-forge
-conda create --name oil-price-prediction --file requirements-dev.txt --channel default --channel conda-forge
+conda install --name oil-price-prediction --file requirements-dev-conda.txt --channel default --channel conda-forge
+conda create --name oil-price-prediction --file requirements-dev-conda.txt --channel default --channel conda-forge
 
 ````
+## install pip packages
+````bash
+pip install -r requirements-dev-pip.txt
+````
+
 ## create requirements.txt
 ````bash
 conda list -e > requirements.txt
