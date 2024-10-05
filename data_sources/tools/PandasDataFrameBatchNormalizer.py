@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from PandasDataFrameNormalizer import PandasDataFrameNormalizer
 
@@ -38,3 +39,8 @@ class PandasDataFrameBatchNormalizer:
 
         df.sort_values(by=['date'], inplace=True)
         return df
+
+    def inverse_transform_numpy_array(self, array: np.array, column: str) -> np.array:
+        """Inverse transform numpy array"""
+
+        return self.__normalizer[column].inverse_transform_numpy_array(array)

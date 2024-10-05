@@ -1,4 +1,7 @@
-tensorflow[and-cuda] = 11.8
+tensorflow[and-cuda] == 2.14.1
 
 # shipped with tensorflow[and-cuda]
 # tensorrt >= 8.6.1
+
+myeia >= 0.3.5
+alpha-vantage >= 2.3.1

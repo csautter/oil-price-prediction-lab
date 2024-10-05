@@ -5,6 +5,9 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+variables:
+  KUBERNETES_NODE_SELECTOR_ARCH: 'kubernetes.io/arch=amd64'
+
 stages:
   - test
 sast:
@@ -18,6 +21,8 @@ secret_detection:
     SECRET_DETECTION_HISTORIC_SCAN: "true"
 
 pytest:
+  variables:
+    KUBERNETES_NODE_SELECTOR_ARCH: 'kubernetes.io/arch=amd64'
   image: python:3.11.5-alpine
   stage: test
   script:
