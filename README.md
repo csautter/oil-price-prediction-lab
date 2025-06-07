@@ -52,3 +52,10 @@ https://www.tensorflow.org/install/source#gpu
 ## Install Tensorflow
 https://www.tensorflow.org/install
 https://www.tensorflow.org/install/pip#windows-wsl2
+
+## create .env file
+Copy the example .env file to create your own configuration:
+````bash
+cp .env.example .env
+````
+Edit the `.env` file to set your environment variables, such API keys, etc.
