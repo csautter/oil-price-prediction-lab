@@ -3,9 +3,12 @@ This project was created to learn and practice Python, Data Science, and Machine
 The focus is on educational purposes, exploring various libraries, tools, and techniques in the Python ecosystem.
 Prediction of oil prices is a complex task that involves various factors, including historical data, market trends, geopolitical events, and economic indicators.
 This project aims to build a foundation for understanding how to approach such problems using Python and its libraries but does not guarantee accurate predictions or insights into real-world oil price movements.
-Due to the limited scope of this project, nobody can or should expect a working solution for oil price prediction.
-But it is a great opportunity to see how challenging it can be to make accurate predictions in a complex domain like oil prices.
+But the project is a great opportunity to see how challenging it can be to make accurate predictions in a complex domain like oil prices.
 ## Install
+This project is developed and tested on Windows in a WSL2 environment with Ubuntu 20.04.
+WSL2 is a great way to run Linux on Windows. But be aware that some features may not work as expected, and you may need to adjust the configuration to suit your needs.
+WSL2 environments are sometimes complex to set up, especially when it comes to installing CUDA and other ML tools depending on GPU Hardware.
+Check also other public available installation guides for WSL2, CUDA if you run into issues.
 ### Install Miniconda
 ````bash
 mkdir -p ~/miniconda3
@@ -65,4 +68,4 @@ Copy the example .env file to create your own configuration:
 ````bash
 cp .env.example .env
 ````
-Edit the `.env` file to set your environment variables, such API keys, etc.
+Edit the `.env` file to set your environment variables, such API keys, etc. Create accounts on the respective platforms to obtain the necessary keys.
