@@ -3,7 +3,10 @@ import pandas as pd
 
 
 class DataSourcesInterface(ABC):
-    """Interface for data sources"""
+    """
+    Interface for data sources.
+    This interface defines the methods that any data source class must implement.
+    """
 
     @abstractmethod
     def get_data(self, seriesid: str, startyear: str = None, endyear: str = None) -> dict:

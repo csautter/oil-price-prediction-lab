@@ -5,10 +5,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from bls_gov.BlsGov import BlsGov
 
-
-# import data_sources.us_bureau_of_labor_statistics.BlsGov as BlsGov
-# from .. import BlsGov
-
 class TestBlsGov(unittest.TestCase):
     def test_get_data(self):
         bls = BlsGov()

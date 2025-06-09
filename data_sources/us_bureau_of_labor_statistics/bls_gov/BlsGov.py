@@ -14,6 +14,7 @@ from data_source_interfaces.DataSourcesInterface import DataSourcesInterface
 
 
 class BlsGov(DataSourcesInterface):
+    """Class to interact with the US Bureau of Labor Statistics (BLS) API."""
     @staticmethod
     def get_cache_directory() -> str:
         return BlsCache.get_cache_directory()

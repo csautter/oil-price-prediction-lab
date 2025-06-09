@@ -69,11 +69,11 @@ class BlsGovGetSeriesDescription:
         df_row = self.get_series_description()
         return df_row['periodicity_code'].values[0]
 
-    def base_code(self) -> str:
+    def get_base_code(self) -> str:
         df_row = self.get_series_description()
         return df_row['base_code'].values[0]
 
-    def pase_period(self) -> str:
+    def get_base_period(self) -> str:
         df_row = self.get_series_description()
         return df_row['base_period'].values[0]
 

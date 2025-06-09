@@ -5,6 +5,8 @@ import sys
 class ImportHelper:
     """
     This class is used to import modules from other directories.
+    It crawls the current directory and its subdirectories for `__init__.py` files and automatically adds those directories to the Python path.
+    This ensures that modules can be imported from all directories of the project.
     """
     __instance = None
     __initalized: bool = False
