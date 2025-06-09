@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
 
 env:
     GITLAB_REPOSITORY: "gitlab.com/csautter/oil-price-prediction.git"
